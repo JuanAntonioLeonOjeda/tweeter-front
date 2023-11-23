@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import {
   Card,
   CardHeader,
@@ -15,7 +16,9 @@ import './LoginForm.css'
 
 function LoginCard() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("")
+
+  const navigate = useNavigate()
 
   const handleClick = async () => {
     try {
@@ -25,7 +28,7 @@ function LoginCard() {
       }
       const result = await login(payload)
       if (result === 200) {
-        // Redirijo al Home
+        navigate('/profile')
       }
     } catch (error) {
       console.log(error)

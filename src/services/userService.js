@@ -7,7 +7,13 @@ const getProfile = async () => {
         authorization: localStorage.token
       }
     })
+    localStorage.setItem('role', data.role)
+    return data
   } catch (error) {
     console.log(error)
   }
 } 
+
+export {
+  getProfile
+}
