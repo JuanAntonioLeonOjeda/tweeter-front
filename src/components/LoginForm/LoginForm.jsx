@@ -1,7 +1,4 @@
-import './LoginForm.css'
-
-import { useState } from "react";
-
+import { useState } from "react"
 import {
   Card,
   CardHeader,
@@ -10,11 +7,30 @@ import {
   Divider,
   Button,
   CardActions
-} from "@mui/material";
+} from "@mui/material"
+
+import { login } from '../../services/authService'
+
+import './LoginForm.css'
 
 function LoginCard() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleClick = async () => {
+    try {
+      const payload = {
+        email,
+        password
+      }
+      const result = await login(payload)
+      if (result === 200) {
+        // Redirijo al Home
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <Card sx={{ width: "50%" }}>
@@ -37,7 +53,7 @@ function LoginCard() {
       <Divider />
       <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Button>Register</Button>
-        <Button color="success">
+        <Button color="success" onClick={ handleClick }>
           Login
         </Button>
       </CardActions>
