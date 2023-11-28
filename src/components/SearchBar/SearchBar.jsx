@@ -1,8 +1,13 @@
+import { useContext } from "react"
+import SearchContext from "../../context/searchContext"
+
 export default function SearchBar () {
+  const { setSearch } = useContext(SearchContext)
 
   const handleKeyDown = (e) => {
-    console.log(e)
-    // if (e.target.value)
+    if (e.key === 'Enter') {
+      setSearch(e.target.value)
+    }
   }
 
   return (

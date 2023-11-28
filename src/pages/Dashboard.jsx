@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 
 import DashboardCard from '../components/DashboardCard/DashboardCard'
 
+import SearchContext from '../context/searchContext'
+
 import { getProfile } from '../services/userService'
-import { getDashboardTweets } from '../services/postService'
+import { getDashboardTweets, queryPosts } from '../services/postService'
 
 export default function DashBoard () {
+  const { search } = useContext(SearchContext)
 
   const [ user, setUser ] = useState({})
   const [tweets, setTweets] = useState([]);
@@ -15,15 +18,23 @@ export default function DashBoard () {
   useEffect(() => {
     const getData = async() => {
       const profile = await getProfile()
-      const arr = await getDashboardTweets()
-      const filtered = arr.filter(elem => {
-        return elem.userId !== profile.id
-      }).slice(80)
+      //const arr = await getDashboardTweets()
+      // const filtered = arr.filter(elem => {
+      //   return elem.userId !== profile.id
+      // }).slice(80)
       setUser(profile)
-      setTweets(filtered)
+      //setTweets(filtered)
     }
     getData()
   }, [])
+
+  useEffect(() => {
+    const query = async () => {
+      const result = await queryPosts(search)
+      console.log(result)
+    }
+    query()
+  }, [search])
 
   const displayCards = () => {
     return tweets.map(tweet => {

@@ -1,3 +1,4 @@
+import { json } from 'react-router-dom'
 import app from './config'
 import jsonpl from './postConfig'
 
@@ -23,7 +24,17 @@ const getDashboardTweets = async () => {
   }
 }
 
+const queryPosts = async (id) => {
+  try {
+    const { data } = await jsonpl.get(`?userId=${id}`)
+    return data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export {
   getMyTweets,
-  getDashboardTweets
+  getDashboardTweets,
+  queryPosts
 }
