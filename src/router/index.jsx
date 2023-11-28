@@ -3,6 +3,7 @@ import { createBrowserRouter, redirect } from 'react-router-dom'
 import LoginPage from '../pages/LoginPage'
 import DashBoard from '../pages/Dashboard'
 import About from '../pages/About'
+import MyTweets from '../pages/MyTweets'
 import AdminPage from '../pages/AdminPage'
 import Root from '../layout'
 
@@ -35,6 +36,17 @@ const router = createBrowserRouter([
         element: <AdminPage />,
         loader: () => {
           if (localStorage.getItem('role') !== 'admin') {
+            return redirect('/')
+          } else {
+            return null
+          }
+        }
+      },
+      {
+        path: 'tweets',
+        element: <MyTweets />,
+        loader: () => {
+          if (!localStorage.getItem('token')) {
             return redirect('/')
           } else {
             return null
