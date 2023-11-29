@@ -1,4 +1,3 @@
-import { json } from 'react-router-dom'
 import app from './config'
 import jsonpl from './postConfig'
 

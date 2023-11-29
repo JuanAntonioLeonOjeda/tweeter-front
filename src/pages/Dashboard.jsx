@@ -18,12 +18,12 @@ export default function DashBoard () {
   useEffect(() => {
     const getData = async() => {
       const profile = await getProfile()
-      //const arr = await getDashboardTweets()
-      // const filtered = arr.filter(elem => {
-      //   return elem.userId !== profile.id
-      // }).slice(80)
+      const arr = await getDashboardTweets()
+      const filtered = arr.filter(elem => {
+        return elem.userId !== profile.id
+      }).slice(80)
       setUser(profile)
-      //setTweets(filtered)
+      setTweets(filtered)
     }
     getData()
   }, [])
